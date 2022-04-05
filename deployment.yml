@@ -1,0 +1,27 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: kcp-test
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kcp-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: kcp-test
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: kcp-test
+      name: kcp-test
+    spec:
+      containers:
+      - image: quay.io/klape/kcp-test-20981d188d776fbf9c42d38a94e189dd@sha256:596ca522639c1aaef79268ab26e2315039df17645cc8c4396a61ff0766d64fa5
+        name: kcp-test
+      serviceAccountName: kcp-test

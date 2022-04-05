@@ -48,6 +48,7 @@ func main() {
 	var config *rest.Config
 	config, err := rest.InClusterConfig()
 	if err != nil {
+		fmt.Printf("Couldn't get in-cluster config: %s", err.Error())
 		config, err = clientcmd.BuildConfigFromFlags("", *kubeconfig)
 		if err != nil {
 			panic(err.Error())
